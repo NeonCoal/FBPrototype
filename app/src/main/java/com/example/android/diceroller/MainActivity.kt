@@ -24,23 +24,25 @@ import java.util.*
 
 class MainActivity : AppCompatActivity() {
 
-    lateinit var diceImage: ImageView
-
+    private lateinit var diceImage: ImageView
+    private var index = 0
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
         val rollButton: Button = findViewById(R.id.roll_button)
         rollButton.setOnClickListener {
-            rollDice()
+            if(index < 6) {
+                rollDice()
+                index++
+            }
         }
 
-        diceImage = findViewById(R.id.dice_image)
+        diceImage = findViewById(R.id.roll_button)
     }
 
     private fun rollDice() {
-        val randomInt = Random().nextInt(6) + 1
-        val drawableResource = when (randomInt) {
+        val drawableResource = when (index) {
             1 -> R.drawable.dice_1
             2 -> R.drawable.dice_2
             3 -> R.drawable.dice_3
